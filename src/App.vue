@@ -1,54 +1,47 @@
 <template>
   <div id="app">
-    <h1 @click="add">LSP {{count}}号 double is {{double}}</h1>
-    <h1>LSP is {{x}}, double is {{doubleX}}</h1>
-    <input type="text" v-model="val" @keyup.enter="addTodo">
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">{{todo.title}}</li>
-    </ul>
+    <!-- <child1 :msg="msg" msg2="哈哈哈"></child1> -->
+    <!-- <child2 @click="show"></child2> -->
+    <div>{{count}}</div>
+    <button @click="updateCount">增加</button>
   </div>
 </template>
 
 <script>
 import {reactive, ref, toRefs} from 'vue';
-import useCounter from './counter.js';
-import useMouse from './mouse.js';
+import Child1 from './components/child1.vue';
+import Child2 from './components/child2.vue';
 
 export default {
   setup(){
-    let val = ref('');
-    let todos = reactive([
-      {
-        id: 0,
-        title: '吃饭',
-        done: false
-      },
-      {
-        id: 1,
-        title: '睡觉',
-        done: false
-      },
-      {
-        id: 2,
-        title: 'lsp',
-        done: false
-      },
-    ]);
-    function addTodo(){
-      todos.push({
-        id: todos.length,
-        title: val.value,
-        done: false
-      })
-      val.value = '';
+    // console.log('我执行了');
+    // const msg = ref('hello, vue3');
+    // return {
+    //   msg
+    // }
+
+    // const show = () => {
+    //   console.log('name', 'cj');
+    // }
+    // return {
+    //   show
+    // }
+
+    const count = ref(0);
+    function updateCount(){
+      count.value++;
     }
-    let {count, double, add} = useCounter();
-    let {x, double: doubleX} = useMouse();
     return {
-      val, todos, addTodo,
-      count, double, add,
-      x, doubleX
-    };
-  }
+      count,
+      updateCount
+    }
+  },
+  components: {
+    Child1,
+    Child2
+  },
+  // beforeCreate(){
+  //   console.log('beforeCreate执行了')
+  // }
 }
 </script>
