@@ -12,15 +12,18 @@
     <input type="text">------
     <input type="text" ref="inputRef"> -->
 
-    <h3>姓名：{{user.name}}</h3>
+    <!-- <h3>姓名：{{user.name}}</h3>
     <h3>年龄：{{user.age}}</h3>
     <h3>夫人：{{user.wife}}</h3>
-    <button @click="updateUser">更新</button>
+    <button @click="updateUser">更新</button> -->
+
+    <!-- <h2>{{fullName1}}</h2> -->
+    <h2>{{fullName2}}</h2>
   </div>
 </template>
 
 <script>
-import {reactive, ref, toRefs, onMounted} from 'vue';
+import {reactive, ref, toRefs, onMounted, computed} from 'vue';
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 
@@ -54,23 +57,54 @@ export default {
     //   inputRef.value && inputRef.value.focus();
     // })
 
+    // const user = reactive({
+    //   name: 'zzz',
+    //   age: 20,
+    //   wife: {
+    //     name: 'ccc',
+    //     age: 18,
+    //     books: ['红宝书', '设计模式', '算法与数据结构']
+    //   }
+    // })
+    // const updateUser = ()=>{
+    //   user.name = 'rrr';
+    //   user.age += 2;
+    //   user.wife.books[0] = '红楼梦';
+    // }
+    // return {
+    //   user,
+    //   updateUser
+    // }
+
+    // const user = reactive({
+    //   firstName: 'Chan',
+    //   lastName: 'Jenny'
+    // })
+    // const fullName1 = computed(() => {
+    //   return user.firstName + user.lastName;
+    // })
+    // return{
+    //   user,
+    //   fullName1
+    // }
+
     const user = reactive({
-      name: 'zzz',
-      age: 20,
-      wife: {
-        name: 'ccc',
-        age: 18,
-        books: ['红宝书', '设计模式', '算法与数据结构']
+      firstName: 'Chan',
+      lastName: 'Jenny'
+    })
+    const fullName2 = computed({
+      get(){
+        return user.firstName + '_' + user.lastName;
+      },
+      set(val){
+        const names = val.split('_');
+        user.firstName = names[0];
+        user.lastName = names[1];
       }
     })
-    const updateUser = ()=>{
-      user.name = 'rrr';
-      user.age += 2;
-      user.wife.books[0] = '红楼梦';
-    }
-    return {
+    return{
       user,
-      updateUser
+      fullName2
     }
   },
   components: {
