@@ -4,9 +4,9 @@
 
     <!-- <child2 @click="show"></child2> -->
 
-    <!-- <div>{{count}}</div>
+    <div>{{count}}</div>
 
-    <button @click="updateCount">增加</button> -->
+    <button @click="updateCount">增加</button>
 
     <!-- <h2>App</h2>
     <input type="text">------
@@ -21,12 +21,12 @@
     <!-- <h2>{{fullName2}}</h2> -->
     
     <!-- <h2>{{fullName3}}</h2> -->
-    <h2>{{fullName4}}</h2>
+    <!-- <h2>{{fullName4}}</h2> -->
   </div>
 </template>
 
 <script>
-import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect} from 'vue';
+import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue';
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 
@@ -132,23 +132,53 @@ export default {
     //   fullName3
     // }
 
-    const user = reactive({
-      firstName: 'Chan',
-      lastName: 'Jenny'
-    });
-    const fullName4 = ref('');
-    watchEffect(user, () => {
-        fullName4.value = firstName + '_' + lastName;
-      }
-    )
+    // const user = reactive({
+    //   firstName: 'Chan',
+    //   lastName: 'Jenny'
+    // });
+    // const fullName4 = ref('');
+    // watchEffect(user, () => {
+    //     fullName4.value = firstName + '_' + lastName;
+    //   }
+    // )
     // onMounted(()=>{
     //   setTimeout(()=>{
     //     user.firstName = 'Rolling';
     //   },3000)
     // })
+    // return {
+    //   user,
+    //   fullName4
+    // }
+
+    
+
+    onBeforeMount(()=>{
+      console.log('--onBeforeMount')
+    })
+    onMounted(()=>{
+      console.log('--onMounted')
+    })
+    onBeforeUpdate(()=>{
+      console.log('--onBeforeUpdate')
+    })
+    onUpdated(()=>{
+      console.log('--onUpdated')
+    })
+    onBeforeUnmount(()=>{
+      console.log('--onBeforeUnmount')
+    })
+    onUnmounted(() => {
+      console.log('--onUnmounted')
+    })
+
+    const count = ref(0);
+    function updateCount(){
+      count.value++;
+    }
     return {
-      user,
-      fullName4
+      count,
+      updateCount
     }
   },
   components: {
