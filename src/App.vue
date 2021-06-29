@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+  <!-- <div id="app"> -->
     <!-- <child1 :msg="msg" msg2="哈哈哈"></child1> -->
 
     <!-- <child2 @click="show"></child2> -->
 
-    <div>{{count}}</div>
+    <!-- <div>{{count}}</div>
 
-    <button @click="updateCount">增加</button>
+    <button @click="updateCount">增加</button> -->
 
     <!-- <h2>App</h2>
     <input type="text">------
@@ -22,16 +22,30 @@
     
     <!-- <h2>{{fullName3}}</h2> -->
     <!-- <h2>{{fullName4}}</h2> -->
-  </div>
+
+    <!-- name:{{name}}
+  </div> -->
+  <h1>父组件</h1>
+  <p>当前颜色：{{color}}</p>
+  <button @click="color='red'">红</button>
+  <button @click="color='green'">绿</button>
+  <button @click="color='blue'">蓝</button>
+  <son></son>
 </template>
 
 <script>
-import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue';
+import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, provide} from 'vue';
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
+import Son from './components/Son.vue';
 
 export default {
   setup(){
+    const color = ref('red');
+    provide('color', color);
+    return {
+      color
+    }
     // console.log('我执行了');
     // const msg = ref('hello, vue3');
     // return {
@@ -151,39 +165,49 @@ export default {
     //   fullName4
     // }
 
-    
+    // onBeforeMount(()=>{
+    //   console.log('--onBeforeMount')
+    // })
+    // onMounted(()=>{
+    //   console.log('--onMounted')
+    // })
+    // onBeforeUpdate(()=>{
+    //   console.log('--onBeforeUpdate')
+    // })
+    // onUpdated(()=>{
+    //   console.log('--onUpdated')
+    // })
+    // onBeforeUnmount(()=>{
+    //   console.log('--onBeforeUnmount')
+    // })
+    // onUnmounted(() => {
+    //   console.log('--onUnmounted')
+    // })
 
-    onBeforeMount(()=>{
-      console.log('--onBeforeMount')
-    })
-    onMounted(()=>{
-      console.log('--onMounted')
-    })
-    onBeforeUpdate(()=>{
-      console.log('--onBeforeUpdate')
-    })
-    onUpdated(()=>{
-      console.log('--onUpdated')
-    })
-    onBeforeUnmount(()=>{
-      console.log('--onBeforeUnmount')
-    })
-    onUnmounted(() => {
-      console.log('--onUnmounted')
-    })
+    // const count = ref(0);
+    // function updateCount(){
+    //   count.value++;
+    // }
+    // return {
+    //   count,
+    //   updateCount
+    // }
 
-    const count = ref(0);
-    function updateCount(){
-      count.value++;
-    }
-    return {
-      count,
-      updateCount
-    }
+    // const state = reactive({
+    //   name: 'Jenny'
+    // });
+    // const state2 = toRefs(state);
+    // setInterval(()=>{
+    //   state.name += '===';
+    // }, 1000);
+    // return {
+    //   ...state2
+    // }
   },
   components: {
     Child1,
-    Child2
+    Child2,
+    Son
   },
   // beforeCreate(){
   //   console.log('beforeCreate执行了')
