@@ -1,51 +1,25 @@
 <template>
-  <h3>vue3 生命周期</h3>
-  <p>{{counter}}</p>
-  <button @click="updateCounter">增加</button>
+  <h3>父组件</h3>
+  <p>当前颜色：{{counter}}</p>
+  <button @click="color='red'">红色</button>
+  <button @click="color='green'">绿色</button>
+  <button @click="color='blue'">蓝色</button>
+  <hr>
+  <son></son>
 </template>
-
 <script>
-import {ref, onMounted, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue';
+import {ref, provide} from 'vue';
+import Son from './components/Son.vue';
 export default {
   setup(){
-    const counter = ref(0);
-    const updateCounter = () => {
-      counter.value++;
-    }
-    onBeforeMount(() => {
-      console.log('--onBeforeMount');
-    })
-    onMounted(() => {
-      console.log('--onMounted');
-    })
-    onBeforeUpdate(() => {
-      console.log('--onBeforeUpdate');
-    })
-    onUpdated(() => {
-      console.log('--onUpdated');
-    })
-    onBeforeUnmount(() => {
-      console.log('--onBeforeUnmount');
-    })
-    onUnmounted(() => {
-      console.log('--onUnmounted');
-    })
+    const color = ref('red');
+    provide('color', color);
     return {
-      counter,
-      updateCounter
+      color
     }
   },
-  created(){
-    console.log('created');
-  },
-  beforeCreate(){
-    console.log('beforeCreate');
-  },
-  beforeMount(){
-    console.log('beforeMount');
-  },
-  mounted(){
-    console.log('mounted');
+  components: {
+    Son
   }
 }
 </script>
