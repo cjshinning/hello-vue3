@@ -32,10 +32,19 @@
   <button @click="color='blue'">蓝</button>
   <son></son> -->
 
-  <div class="father">
+  <!-- <div class="father">
     <h2>App</h2>
     <modal-button></modal-button>
-  </div>
+  </div> -->
+
+  <Suspense>
+    <template v-slot:default>
+      <AsyncComp/>
+    </template>
+    <template v-slot:fallback>
+      <h1>LOADING...</h1>
+    </template>
+  </Suspense>
 </template>
 
 <script>
@@ -44,14 +53,16 @@ import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 import Son from './components/Son.vue';
 import ModalButton from './components/ModalButton.vue';
+import {defineAsyncComponent} from 'vue';
+const AsyncComp = defineAsyncComponent(()=>import('./components/AsyncComp.vue'));
 
 export default {
   setup(){
-    const color = ref('red');
-    provide('color', color);
-    return {
-      color
-    }
+    // const color = ref('red');
+    // provide('color', color);
+    // return {
+    //   color
+    // }
     // console.log('我执行了');
     // const msg = ref('hello, vue3');
     // return {
@@ -209,12 +220,15 @@ export default {
     // return {
     //   ...state2
     // }
+
+    return {}
   },
   components: {
     Child1,
     Child2,
     Son,
-    ModalButton
+    ModalButton,
+    AsyncComp
   },
   // beforeCreate(){
   //   console.log('beforeCreate执行了')
