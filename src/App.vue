@@ -25,12 +25,17 @@
 
     <!-- name:{{name}}
   </div> -->
-  <h1>父组件</h1>
+  <!-- <h1>父组件</h1>
   <p>当前颜色：{{color}}</p>
   <button @click="color='red'">红</button>
   <button @click="color='green'">绿</button>
   <button @click="color='blue'">蓝</button>
-  <son></son>
+  <son></son> -->
+
+  <div class="father">
+    <h2>App</h2>
+    <modal-button></modal-button>
+  </div>
 </template>
 
 <script>
@@ -38,6 +43,7 @@ import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect, onBefore
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 import Son from './components/Son.vue';
+import ModalButton from './components/ModalButton.vue';
 
 export default {
   setup(){
@@ -207,7 +213,8 @@ export default {
   components: {
     Child1,
     Child2,
-    Son
+    Son,
+    ModalButton
   },
   // beforeCreate(){
   //   console.log('beforeCreate执行了')
