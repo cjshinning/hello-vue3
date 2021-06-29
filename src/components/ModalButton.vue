@@ -6,8 +6,6 @@
         <teleport to="body">
             <div class="looklook" v-if="modalOpen">
                 看看我出现在哪里
-                <!-- teleport start -->
-                <!-- teleport end -->
                 <button @click="modalOpen=false">
                     close
                 </button>
