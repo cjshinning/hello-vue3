@@ -5,16 +5,24 @@
 </template>
 
 <script>
-import {reactive, computed} from 'vue';
+import {ref, reactive, watch} from 'vue';
 export default {
   setup(){
     const user = reactive({
       firstName: 'Jenny',
       lastName: 'Chan'
     });
-    const fullName = computed(() => {
-      return user.firstName + ' ' + user.lastName;
-    })
+    const fullName = ref('');
+    watch(
+      user,
+      ({firstName, lastName}) => {
+        fullName.value = firstName + '_' + lastName;
+      },
+      {
+        immediate: true,
+        deep: true
+      }
+    )
     return {
       user,
       fullName
