@@ -18,12 +18,15 @@
     <button @click="updateUser">更新</button> -->
 
     <!-- <h2>{{fullName1}}</h2> -->
-    <h2>{{fullName2}}</h2>
+    <!-- <h2>{{fullName2}}</h2> -->
+    
+    <!-- <h2>{{fullName3}}</h2> -->
+    <h2>{{fullName4}}</h2>
   </div>
 </template>
 
 <script>
-import {reactive, ref, toRefs, onMounted, computed} from 'vue';
+import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect} from 'vue';
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 
@@ -88,23 +91,64 @@ export default {
     //   fullName1
     // }
 
+    // const user = reactive({
+    //   firstName: 'Chan',
+    //   lastName: 'Jenny'
+    // })
+    // const fullName2 = computed({
+    //   get(){
+    //     return user.firstName + '_' + user.lastName;
+    //   },
+    //   set(val){
+    //     const names = val.split('_');
+    //     user.firstName = names[0];
+    //     user.lastName = names[1];
+    //   }
+    // })
+    // return{
+    //   user,
+    //   fullName2
+    // }
+
+    // const user = reactive({
+    //   firstName: 'Chan',
+    //   lastName: 'Jenny'
+    // });
+    // const fullName3 = ref('');
+    // watch(user, ({firstName, lastName}) => {
+    //     fullName3.value = firstName + '_' + lastName;
+    //   },
+    //   {
+    //     immediate: true, deep: true
+    //   }
+    // )
+    // onMounted(()=>{
+    //   setTimeout(()=>{
+    //     user.firstName = 'Rolling';
+    //   },3000)
+    // })
+    // return {
+    //   user,
+    //   fullName3
+    // }
+
     const user = reactive({
       firstName: 'Chan',
       lastName: 'Jenny'
-    })
-    const fullName2 = computed({
-      get(){
-        return user.firstName + '_' + user.lastName;
-      },
-      set(val){
-        const names = val.split('_');
-        user.firstName = names[0];
-        user.lastName = names[1];
+    });
+    const fullName4 = ref('');
+    watchEffect(user, () => {
+        fullName4.value = firstName + '_' + lastName;
       }
-    })
-    return{
+    )
+    // onMounted(()=>{
+    //   setTimeout(()=>{
+    //     user.firstName = 'Rolling';
+    //   },3000)
+    // })
+    return {
       user,
-      fullName2
+      fullName4
     }
   },
   components: {
