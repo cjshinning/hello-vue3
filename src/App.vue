@@ -48,12 +48,11 @@
 </template>
 
 <script>
-import {reactive, ref, toRefs, onMounted, computed, watch, watchEffect, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, provide} from 'vue';
+import {reactive,defineAsyncComponent, ref, toRefs, onMounted, computed, watch, watchEffect, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, provide, isRef, isReactive, readonly, isReadonly,isProxy} from 'vue';
 import Child1 from './components/child1.vue';
 import Child2 from './components/child2.vue';
 import Son from './components/Son.vue';
 import ModalButton from './components/ModalButton.vue';
-import {defineAsyncComponent} from 'vue';
 const AsyncComp = defineAsyncComponent(()=>import('./components/AsyncComp.vue'));
 
 export default {
@@ -220,6 +219,17 @@ export default {
     // return {
     //   ...state2
     // }
+
+    const state1 = ref(1);
+    console.log('isRef: ', isRef(state1));
+    const state2 = reactive({});
+    console.log('isReactive: ', isReactive(state2));
+    const state3 = readonly({});
+    console.log('isReadonly: ', isReadonly(state3));
+    const state4 = reactive({});
+    console.log('isProxy: ', isProxy(state2));
+    console.log('isProxy: ', isProxy(state4));
+    
 
     return {}
   },
