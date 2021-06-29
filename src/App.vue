@@ -1,31 +1,25 @@
 <template>
-  <p>年龄： {{user.name}}</p>
-  <p>性别： {{user.age}}</p>
-  <p>其他： {{user.other}}</p>
-  <button @click="updateUser">更新</button>
+  <p>名： {{user.firstName}}</p>
+  <p>性： {{user.lastName}}</p>
+  <p>全名： {{fullName}}</p>
 </template>
 
 <script>
-import {reactive} from 'vue';
+import {reactive, computed} from 'vue';
 export default {
   setup(){
     const user = reactive({
-      name: 'Jenny',
-      age: 18,
-      other: {
-        country: 'China',
-        hobbies: ['coding', 'singing']
-      }
+      firstName: 'Jenny',
+      lastName: 'Chan'
     });
-    const updateUser = () => {
-      user.name = 'Jane';
-      user.age = 20;
-      user.other.hobbies[1] = 'drawing';
-    }
+    const fullName = computed(() => {
+      return user.firstName + ' ' + user.lastName;
+    })
     return {
       user,
-      updateUser
+      fullName
     }
   }
 }
 </script>
+
