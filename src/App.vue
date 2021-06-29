@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {ref, reactive, watch} from 'vue';
+import {ref, reactive, watchEffect} from 'vue';
 export default {
   setup(){
     const user = reactive({
@@ -13,16 +13,9 @@ export default {
       lastName: 'Chan'
     });
     const fullName = ref('');
-    watch(
-      user,
-      ({firstName, lastName}) => {
-        fullName.value = firstName + '_' + lastName;
-      },
-      {
-        immediate: true,
-        deep: true
-      }
-    )
+    watchEffect(() => {
+      fullName.value = user.firstName + '_' + user.lastName;
+    })
     return {
       user,
       fullName
@@ -30,4 +23,5 @@ export default {
   }
 }
 </script>
+
 
